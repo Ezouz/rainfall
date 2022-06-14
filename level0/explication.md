@@ -1,26 +1,22 @@
 
-ls -la => level1 owner / level0 group
-permissions => file rw permission for group / read execute / extended
 
-download file
-`$scp -P 4242 level0@192.168.56.103:/home/user/level0/level0 /home/zouz/Desktop/level0`
+We can see that the file level0 belongs to user level1. We are in the same group users, so we can execute it. 
+If we reverse engineer the file, we see that the program expects an argument and does a simple comparison with it to open a shell.
 
-open it with cutter, in main you can see the line:
-`
+In main you can see the line:
+```
 0x08048ed4      call atoi          ; sym.atoi ; int atoi(const char *str)
 0x08048ed9      cmp eax, 0x1a7     ; 423
-`
-so we see it takes a parameter, transform  and compare its value
+```
 
-execute level0 program with parameter: 423
-`$./level0 423`
+To get the flag, execute level0 program with parameter: 423
+```
+level0@RainFall:~$ ./level0 423
+$ whoami
+level1
+```
 
 then you can access
-`$ls -la /home/user/level1`
-output: 
-`
-...
--rw-r--r--+ 1 level1 level1   65 Sep 23  2015 .pass
-`
-
-read it !
+```
+$ cat /home/user/level1/.pass
+```
