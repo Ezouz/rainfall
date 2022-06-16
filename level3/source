@@ -1,0 +1,20 @@
+
+void main(void)
+{
+    v();
+    return;
+}
+
+void v(void)
+{
+    char *format;
+
+    fgets(&format, 0x200, _stdin);
+    printf(&format);
+    if (_m == 0x40)
+    {
+        fwrite("Wait what?!\n", 1, 0xc, _stdout);
+        system("/bin/sh");
+    }
+    return;
+}

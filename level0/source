@@ -1,0 +1,75 @@
+
+// WARNING: [rz-ghidra] Var fini is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var rtld_fini is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var stack_end is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var ubp_av is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var init is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_78h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Type jmp_buf of variable env has size 0
+// WARNING: [rz-ghidra] Var argc is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var len is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var src is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_23h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Detected overlap for variable var_532h
+// WARNING: [rz-ghidra] Detected overlap for variable var_531h
+// WARNING: [rz-ghidra] Detected overlap for variable var_530h_2
+// WARNING: [rz-ghidra] Detected overlap for variable var_532h_2
+// WARNING: [rz-ghidra] Detected overlap for variable var_77h
+// WARNING: [rz-ghidra] Detected overlap for variable var_74h_2
+// WARNING: [rz-ghidra] Detected overlap for variable var_77h_2
+// WARNING: [rz-ghidra] Var arg_8h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_4h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Detected overlap for variable var_1109h
+// WARNING: [rz-ghidra] Detected overlap for variable var_64h
+// WARNING: [rz-ghidra] Detected overlap for variable var_60h
+// WARNING: [rz-ghidra] Var arg_3ch is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var function is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var line is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var file is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_60h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_5ch is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_50h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_54h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_58h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_20h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_1ch is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_1fh is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var desc is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Detected overlap for variable var_1d4h
+// WARNING: [rz-ghidra] Var arg_460h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_40h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_44h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_154h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_30h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_34h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_38h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var str is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var s is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_48h is stack pointer based, which is not supported for decompilation.
+// WARNING: [rz-ghidra] Var arg_24h is stack pointer based, which is not supported for decompilation.
+
+undefined4 main(undefined4 placeholder_0, char **envp)
+{
+    int32_t iVar1;
+    undefined4 uStack32;
+    undefined4 uStack28;
+    undefined4 uStack24;
+    undefined4 uStack20;
+
+    iVar1 = atoi(envp[1]);
+    if (iVar1 == 0x1a7)
+    {
+        uStack32 = __strdup("/bin/sh");
+        uStack28 = 0;
+        uStack20 = getegid();
+        uStack24 = geteuid();
+        __setresgid(uStack20, uStack20, uStack20);
+        setresuid(uStack24, uStack24, uStack24);
+        execv("/bin/sh", &uStack32);
+    }
+    else
+    {
+        _IO_fwrite("No !\n", 1, 5, _stderr);
+    }
+    return 0;
+}

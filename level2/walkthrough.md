@@ -27,7 +27,7 @@ Those two lines after the call to `gets()` are showing a protection against a st
 0x080484fb      and eax, 0xb0000000
 0x08048500      cmp eax, 0xb0000000
 ```
-For example, if we try to target an address after the `gets()` like `ret => 0x0804853e` and then go 4 bytes after the original EIP address `info frame` to target the NOP `0xbffff71c + 4 = 0xBFFFF720`, the program calls `exit`.
+For example, if we try to target an address after the `gets()` like `ret => 0x0804853e` and then go 4 bytes after the original EIP address `info frame` to target the NOP `0xbffff71c + 4 = 0xbffff720`, the program calls `exit`.
 
 If we put our shellcode in an environment variable, we be sure that it's not alterated with the buffer.
 

@@ -16,9 +16,10 @@ eip            0x42424242	0x42424242
 
 We rewrited the `seip` value and the program couldn't continue correctly not knowing what's at the address : 42424242.
 
-
 0x08048444 is the address of the function `run()`,
 \x44\x84\x04\x08 is the transcription of that address on a little-endian machine.
+
+\x44\x84\x04\x08 are the four bytes of the target address. In C language, \x44 in a string tells the compiler to put a hexadecimal value 0x44 in the current position. The value will take up just one byte. Without using \x, if we directly put "44" in a string, the ASCII values of the characters ’4’ will be stored (ASCII value = 34).
 
 ```
 python -c 'print "A" * 76 + "\x44\x84\x04\x08"' | ./level1
