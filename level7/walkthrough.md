@@ -1,6 +1,4 @@
-The `main` function expects 2 arguments - 2 simultaneous operations
-get c value to be printed by m
-execute m on hijacking the puts execution
+The `main` function expects 2 arguments to get `c` value to be print by `m`, so therefore, execute `m` by hijacking the `puts` execution.
 
 1. Find the buffer size of the first `strcpy`.
 In gdb :
