@@ -46,7 +46,7 @@ undefined main(void)
             // 0x080485cb <+103>:	mov    esi,edx
             // 0x080485cd <+105>:	mov    edi,eax
             // 0x080485cf <+107>:	repz cmps BYTE PTR ds:[esi],BYTE PTR es:[edi]
-        // Compare l'octet adressé par DS:SI et celui adressé par ES:DI. Si DF = 0, alors SI et DI sont ensuite incrémentés, sinon ils sont décrémentés.
+        // Compare l octet adressé par DS:SI et celui adressé par ES:DI. Si DF = 0, alors SI et DI sont ensuite incrémentés, sinon ils sont décrémentés.
         do {
             // 0x080485d1 <+109>:	seta   dl
             // 0x080485d4 <+112>:	setb   al
@@ -57,7 +57,7 @@ undefined main(void)
             if (iVar2 == 0) break;
             iVar2 = iVar2 + -1;
             bVar7 = *puVar4 < *puVar6;
-            bVar10 = *puVar4 == *puVar6;
+            bVar10  = *puVar4 == *puVar6;
             // if puVar4 = 'auth ' (5 firsts characters of stdin because uint8_t auStack144 [5])
             puVar4 = puVar4 + (uint32_t)uVar12 * -2 + 1;
             puVar6 = puVar6 + (uint32_t)uVar12 * -2 + 1;
@@ -65,10 +65,9 @@ undefined main(void)
         } while (bVar10);
         // leave loop and continue
         uVar8 = 0;
-        // if sdin input > 'auth ' = sdin input < 'auth ' ?!
         uVar11 = (!bVar7 && !bVar10) == bVar7;
            // 0x080485dd <+121>:	movsx  eax,al
-        // Déplace le contenu signé d'un registre de 8 bits dans un registre de 16 bits, ou bien déplace le contenu signé d'un registre de 16 bits dans un registre de 32 bits.
+        // Déplace le contenu signé d un registre de 8 bits dans un registre de 16 bits, ou bien déplace le contenu signé d un registre de 16 bits dans un registre de 32 bits.
         // Si Source est négatif, la partie haute de Destination sera remplie de 1 binaires, sinon elle sera remplie de 0.
 
         // al = (eax < 0) ? 1 : 0;
@@ -85,9 +84,9 @@ undefined main(void)
                 // 0x080485f0 < +140 > : mov ds : 0x8049aac, eax
                 // 0x080485f5 < +145 > : mov eax, ds : 0x8049aac
                 // 0x080485fa < +150 > : mov DWORD PTR[eax], 0x0
+                *_auth = 0;
                 // 0x08048600 < +156 > : lea eax, [esp + 0x20]
                 // 0x08048604 < +160 > : add eax, 0x5
-                    *_auth = 0;
                 // 0x08048607 < +163 > : mov DWORD PTR[esp + 0x1c], 0xffffffff 
                 // 0x0804860f < +171 > : mov edx, eax 
                 // 0x08048611 < +173 > : mov eax, 0x0 
@@ -100,7 +99,7 @@ undefined main(void)
                 {
                 // 0x0804861e < +186 > : mov eax, ecx 
                 // 0x08048620 < +188 > : not eax
-x                    if (uVar3 == 0)
+                    if (uVar3 == 0)
                         break;
                 // 0x08048622 < +190 > : sub eax, 0x1 
                     uVar3 = uVar3 - 1;
@@ -125,7 +124,7 @@ x                    if (uVar3 == 0)
                 // 0x08048646 < +226 > : mov edx, eax 
                 // 0x08048648 < +228 > : mov eax, 0x804881f 
                     strcpy(_auth, acStack139);
-                    // copier le contenu d'une chaîne de caractères dans une autre dest/src
+                    // copier le contenu d une chaîne de caractères dans une autre dest/src
                 }
             }
                 // 0x0804864d < +233 > : mov ecx, 0x5 
@@ -202,25 +201,35 @@ x                    if (uVar3 == 0)
                     puVar6 = puVar6 + (uint32_t)uVar12 * -2 + 1;
                 } while ((bool)uVar8);
                 uVar11 = 0;
+
+            //    al = (eax < 0) ? 1 : 0;
+            //     ecx = edx;
+            //     eax = ecx;
+            //     eax = (int32_t) al;
                 // 0x0804869a < +310 > : movsx eax, al
                 uVar8 = (!(bool)uVar9 && !(bool)uVar8) == (bool)uVar9;
+
                 // 0x0804869d < +313 > : test eax, eax
                 // 0x0804869f < +315 > : jne 0x80486b5 < main + 337 >
                 if ((bool)uVar8)
-                {
+                    {
+            //     if (eax == 0) {
+            //         eax = &src;
+            //         eax += 7;
+            //         eax = strdup (eax);
                 // 0x080486a1 < +317 > : lea eax, [esp + 0x20]
                 // 0x080486a5 < +321 > : add eax, 0x7
                 // 0x080486a8 < +324 > : mov DWORD PTR[esp], eax
                 // 0x080486ab < +327 > : call 0x8048430 < strdup @plt >
                 // 0x080486b0 < +332 > : mov ds : 0x8049ab0, eax
+                uVar11 = (uint8_t *)0xfffffff8 < auStack144;
+                uVar8 = auStack137 == (undefined *)0x0;
+                _service = strdup(auStack137);
+                // La fonction strdup() renvoie un pointeur sur une nouvelle chaîne de caractères
+            }
                 // 0x080486b5 < +337 > : lea eax, [esp + 0x20]
                 // 0x080486b9 < +341 > : mov edx, eax
                 // 0x080486bb < +343 > : mov eax, 0x804882d
-                    uVar11 = (uint8_t *)0xfffffff8 < auStack144;
-                    uVar8 = auStack137 == (undefined *)0x0;
-                    _service = strdup(auStack137);
-                    // La fonction strdup() renvoie un pointeur sur une nouvelle chaîne de caractères
-                }
                 // 0x080486c0 < +348 > : mov ecx, 0x5
                 // 0x080486c5 < +353 > : mov esi, edx
                 // 0x080486c7 < +355 > : mov edi, eax
