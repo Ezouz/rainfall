@@ -68,7 +68,7 @@ Breakpoint 1, 0xb7e78850 in printf () from /lib/i386-linux-gnu/libc.so.6
 0x804a008:	0x0000000a
 ```
 
-1. the `service` command use `strdup` that also uses `malloc`, and we can observe  that its value increases :
+2. the `service` command use `strdup` that also uses `malloc`, and we can observe that its value increases :
 ```
 level8@RainFall:~$ ./level8 
 (nil), (nil) 

@@ -6,7 +6,7 @@ In `p()` we can see :
    0x080484ea <+22>:	mov    DWORD PTR [esp],eax
    0x080484ed <+25>:	call   0x80483c0 <gets@plt>
 ```
- eax value is at address `ebp-0x4c`, and `seip` is by convention at `ebp+0x04` so we do the maths :
+eax value is at address `ebp-0x4c`, and `seip` is by convention at `ebp+0x04` so we do the maths :
 ```
 >>> 0x04 - (-0x4c)
 80
