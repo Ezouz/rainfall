@@ -31,7 +31,8 @@ Continuing.
 Program received signal SIGSEGV, Segmentation fault.
 0xb7eb18f3 in ?? () from /lib/i386-linux-gnu/libc.so.6
 ```
-The 2nd `strcpy` tries to write the content of our argv[2] into the value of the first.
+
+Our First `strcpy` can help rewrite the destination address (eax) of the second one.
 
 3. Use that observation to replace the address of `puts` with the address of `m`.
 ```

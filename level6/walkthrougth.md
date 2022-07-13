@@ -1,4 +1,4 @@
-The program expects a command line input that will be use in a `strcpy` just before the double pointer on the `m()` function is executed. We can see an hidden function `n()` which prints the flag we need. Here the function `strcpy` will copy the bytes of the source `argv[1]` to dest `uVar1` until meet a `\0`, but without check on the size. We will have to trace the value of the parameter we pass to level6 to exploit the buffer of `strcpy`, in order to change the execution of `m`.
+The program expects a command line input that will be use in a `strcpy` just before the double pointer on the `m()` function is executed. We can see an hidden function `n()` which prints the flag we need. Here the function `strcpy` will copy the bytes of the source `argv[1]` to dest `uVar1` until meet a `\0`, but without a check on the size. We will have to trace the value of the parameter we pass to level6 to exploit the buffer of `strcpy`, in order to change the execution of `m`.
 
 1. Find out the buffer’s size
 ```

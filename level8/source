@@ -120,13 +120,13 @@ undefined main(void)
                 // 0x08048636 < +210 > : mov DWORD PTR[esp + 0x4], edx 
                 // 0x0804863a < +214 > : mov DWORD PTR[esp], eax 
                 // 0x0804863d < +217 > : call 0x8048460 < strcpy @plt > 
-                // 0x08048642 < +222 > : lea eax, [esp + 0x20] 
-                // 0x08048646 < +226 > : mov edx, eax 
-                // 0x08048648 < +228 > : mov eax, 0x804881f 
                     strcpy(_auth, acStack139);
                     // copier le contenu d une chaîne de caractères dans une autre dest/src
                 }
             }
+                // 0x08048642 < +222 > : lea eax, [esp + 0x20] 
+                // 0x08048646 < +226 > : mov edx, eax 
+                // 0x08048648 < +228 > : mov eax, 0x804881f 
                 // 0x0804864d < +233 > : mov ecx, 0x5 
             iVar2 = 5;
                 // 0x08048652 < +238 > : mov esi, edx 
@@ -171,11 +171,11 @@ undefined main(void)
                 // 0x0804866b < +263 > : mov eax, ds : 0x8049aac 
                 // 0x08048670 < +268 > : mov DWORD PTR[esp], eax 
                 // 0x08048673 < +271 > : call 0x8048420 < free @plt > 
+                free(_auth);
+            }
                 // 0x08048678 < +276 > : lea eax, [esp + 0x20] 
                 // 0x0804867c < +280 > : mov edx, eax 
                 // 0x0804867e < +282 > : mov eax, 0x8048825 
-                free(_auth);
-            }
                 // 0x08048683 < +287 > : mov ecx, 0x6 
                 // 0x08048688 < +292 > : mov esi, edx 
                 // 0x0804868a < +294 > : mov edi, eax
@@ -213,19 +213,19 @@ undefined main(void)
                 // 0x0804869f < +315 > : jne 0x80486b5 < main + 337 >
                 if ((bool)uVar8)
                     {
-            //     if (eax == 0) {
-            //         eax = &src;
-            //         eax += 7;
-            //         eax = strdup (eax);
-                // 0x080486a1 < +317 > : lea eax, [esp + 0x20]
-                // 0x080486a5 < +321 > : add eax, 0x7
-                // 0x080486a8 < +324 > : mov DWORD PTR[esp], eax
-                // 0x080486ab < +327 > : call 0x8048430 < strdup @plt >
-                // 0x080486b0 < +332 > : mov ds : 0x8049ab0, eax
-                uVar11 = (uint8_t *)0xfffffff8 < auStack144;
-                uVar8 = auStack137 == (undefined *)0x0;
-                _service = strdup(auStack137);
-                // La fonction strdup() renvoie un pointeur sur une nouvelle chaîne de caractères
+                        //     if (eax == 0) {
+                        //         eax = &src;
+                        //         eax += 7;
+                        //         eax = strdup (eax);
+                        // 0x080486a1 < +317 > : lea eax, [esp + 0x20] // load the value at esp + 0x20 - store the calculated memory offset
+                        // 0x080486a5 < +321 > : add eax, 0x7
+                        // 0x080486a8 < +324 > : mov DWORD PTR[esp], eax
+                        // 0x080486ab < +327 > : call 0x8048430 < strdup @plt >
+                        // 0x080486b0 < +332 > : mov ds : 0x8049ab0, eax
+                        uVar11 = (uint8_t *)0xfffffff8 < auStack144;
+                        uVar8 = auStack137 == (undefined *)0x0;
+                        _service = strdup(auStack137);
+                        // La fonction strdup() renvoie un pointeur sur une nouvelle chaîne de caractères
             }
                 // 0x080486b5 < +337 > : lea eax, [esp + 0x20]
                 // 0x080486b9 < +341 > : mov edx, eax
@@ -267,22 +267,25 @@ undefined main(void)
             // eax = *((eax + 0x20));
             // if (eax != 0)
 
-                // 0x080486e2 < +382 > : mov eax, ds : 0x8049aac
-                // 0x080486e7 < +387 > : mov eax, DWORD PTR[eax + 0x20]
-                // 0x080486ea < +390 > : test eax, eax
-                // 0x080486ec < +392 > : je 0x80486ff < main + 411 >
-                // 0x080486ee < +394 > : mov DWORD PTR[esp], 0x8048833
-                // 0x080486f5 < +401 > : call 0x8048480 < system @plt >
-                // 0x080486fa < +406 > : jmp 0x8048574 < main + 16 >
-                // 0x080486ff < +411 > : mov eax, ds : 0x8049aa0
-                // 0x08048704 < +416 > : mov edx, eax
-                // 0x08048706 < +418 > : mov eax, 0x804883b
-                // 0x0804870b < +423 > : mov DWORD PTR[esp + 0xc], edx
-                // 0x0804870f < +427 > : mov DWORD PTR[esp + 0x8], 0xa
-                // 0x08048717 < +435 > : mov DWORD PTR[esp + 0x4], 0x1
-                // 0x0804871f < +443 > : mov DWORD PTR[esp], eax
-                // 0x08048722 < +446 > : call 0x8048450 < fwrite @plt >
-                // 0x08048727 < +451 > : jmp 0x8048574 < main + 16 >
+            // 0x080486e2 < +382 > : mov eax, ds : 0x8049aac // move auth value in eax
+            // 0x080486e7 < +387 > : mov eax, DWORD PTR[eax + 0x20] //  DWORD PTR means Double-word property which is 32 bits.
+            // so the whole instruction means
+            // move eax + 20 as a 32 bits word to the eax register
+            // 0x080486ea < +390 > : test eax, eax //  test logical AND, return 0 if x = 0
+            // 0x080486ec < +392 > : je 0x80486ff < main + 411 >  // jumps if the %eax is zero.
+            // 0x080486ee < +394 > : mov DWORD PTR[esp], 0x8048833 // else proceed to system call
+            // 0x080486f5 < +401 > : call 0x8048480 < system @plt >
+            // 0x080486fa < +406 > : jmp 0x8048574 < main + 16 >
+            
+            // 0x080486ff < +411 > : mov eax, ds : 0x8049aa0
+            // 0x08048704 < +416 > : mov edx, eax
+            // 0x08048706 < +418 > : mov eax, 0x804883b
+            // 0x0804870b < +423 > : mov DWORD PTR[esp + 0xc], edx
+            // 0x0804870f < +427 > : mov DWORD PTR[esp + 0x8], 0xa
+            // 0x08048717 < +435 > : mov DWORD PTR[esp + 0x4], 0x1
+            // 0x0804871f < +443 > : mov DWORD PTR[esp], eax
+            // 0x08048722 < +446 > : call 0x8048450 < fwrite @plt >
+            // 0x08048727 < +451 > : jmp 0x8048574 < main + 16 >
             if (_auth[8] == 0)
             {
                 fwrite("Password:\n", 1, 10, _stdout);

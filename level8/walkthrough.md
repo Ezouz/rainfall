@@ -40,7 +40,7 @@ When we look at the `main` function, we can see that `auStack144` value si compa
 0x080486e7 <+387>:	mov    eax,DWORD PTR [eax+0x20]
 0x080486ea <+390>:	test   eax,eax
 ```
-to unlock the shell, there is a check if something comes 32 bytes (0x20) after `auth`.
+to unlock the shell, the program will load the value at `0x8049aac` (`auth`) and check if `eax + 0x20` exists.
 
 
 1. type `auth ` to create a pointer on a memory zone in the heap
@@ -68,6 +68,8 @@ Breakpoint 1, 0xb7e78850 in printf () from /lib/i386-linux-gnu/libc.so.6
 0x804a008:	0x0000000a
 ```
 
+now the value stored in `auth` exists.
+
 2. the `service` command use `strdup` that also uses `malloc`, and we can observe that its value increases :
 ```
 level8@RainFall:~$ ./level8 
@@ -80,12 +82,11 @@ service
 
 So we know we must initialize by typing `auth ` one time and then if we calculate :
 ```
->>> int('0x20', 16) + int('0x804a008', 16)
-134520872
->>> hex(134520872)
+>>> hex(0x804a008 + 0x20)
 '0x804a028'
 ```
-so we have to type `service` two times then `login`.
+
+We have to type `service` two times then `login`.
 
 ```
 0x804a008, 0x804a018 

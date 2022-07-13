@@ -1,14 +1,6 @@
 
 // WARNING: [rz-ghidra] Removing arg arg_4h because it doesn't fit into ProtoModel
 
-void main(void)
-{
-    p();
-    return;
-}
-
-// WARNING: [rz-ghidra] Removing arg arg_4h because it doesn't fit into ProtoModel
-
 void p(void)
 {
     uint32_t unaff_retaddr;
@@ -24,5 +16,13 @@ void p(void)
     }
     puts(&src);
     strdup(&src);
+    return;
+}
+
+// WARNING: [rz-ghidra] Removing arg arg_4h because it doesn't fit into ProtoModel
+
+void main(void)
+{
+    p();
     return;
 }
